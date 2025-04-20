@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import {motion} from 'framer-motion'
 import { useRouter } from 'next/navigation'
 
-import { useAddorTrashButtons } from './hooks/useAddorTrashButtons'
 import TrashIcon from '@/assets/Post-actions/trash.svg'
 import AddIcon from '@/assets/Post-actions/plus.svg'
 

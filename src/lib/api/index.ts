@@ -1,11 +1,7 @@
 import axios, { AxiosError } from "axios"
-import { GetServerSidePropsContext } from "next"
 import { getToken } from "../cookies"
-import Cookies from "universal-cookie"
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
-
-const context = <GetServerSidePropsContext>{}
 
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,

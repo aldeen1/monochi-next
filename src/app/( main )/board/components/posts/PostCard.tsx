@@ -1,8 +1,7 @@
 import { Post } from "@/types/posts";
-import React, { FC, useEffect, useState } from 'react'
-import {redirect, useRouter} from 'next/navigation'
+import React, { useState } from 'react'
+import { useRouter} from 'next/navigation'
 
-import EditIcon from '@/assets/Post-actions/adjustments.svg'
 import CommentIcon from '@/assets/Post-actions/chat.svg'
 import LikeIcon from '@/assets/Post-actions/heart.svg'
 import LikedIcon from '@/assets/Post-actions/full-heart.svg'
@@ -19,8 +18,8 @@ const PostCard: React.FC<PostCardProps> = ({ post, isDragged = false }) => {
   const defaultImage = "https://i.pinimg.com/736x/7c/fb/49/7cfb49f5d3117ec69c15845dfe33c78a.jpg"
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false)
-  const {mutateAsync: handleLike, isSuccess: liked} = usePutLikePost();
-  const {mutateAsync: handleDislike, isSuccess: disliked } = useDeleteLikePost()
+  const {mutateAsync: handleLike} = usePutLikePost();
+  const {mutateAsync: handleDislike} = useDeleteLikePost()
 
   const handlePostClick = () => {
     if(!isDragged){

@@ -96,7 +96,7 @@ export const useGetUserPosts = (username: string, isLiked? : boolean) => {
     return useQuery({
         queryKey: ['userPosts', username],
         queryFn: async () => {
-            const response = await postApi.getUserPost(username)
+            const response = await postApi.getUserPost(username, isLiked)
             console.log('Get user posts, ',response)
             if (!response.data) {
                 return []

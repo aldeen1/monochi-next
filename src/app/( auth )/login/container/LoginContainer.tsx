@@ -7,8 +7,6 @@ import { useLogin, LoginForm } from '@/lib/api/auth'
 import useAuthStore from '@/store/useAuthStore'
 
 const LoginContainer = () => {
-    const { isAuthed } = useAuthStore()
-
     const methods = useForm<LoginForm>({
         defaultValues: {
             username: '',

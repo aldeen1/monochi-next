@@ -2,7 +2,6 @@
 
 import PostList from '../../board/components/posts/PostList'
 import { useGetUsername } from '@/lib/api/profile'
-import { useProfileButton } from '@/app/components/profile-button/hooks/useProfileButton'
 import { useGetUserPosts } from '@/lib/api/post'
 import ProfileCard from '../component/ProfileCard'
 import { User } from '@/types/user'

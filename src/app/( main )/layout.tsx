@@ -4,7 +4,7 @@ import Sidebar from "@/app/components/Navbar/sidebar";
 import '../globals.css'
 import ProfileButton from "../components/profile-button/profile-button";
 import SearchBar from "../components/searchbar/searchbar";
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const SearchContext = createContext<{
   searchQuery: string;

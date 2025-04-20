@@ -1,5 +1,5 @@
 import React from "react";
-import { toast, Toaster, ToastBar, ToastOptions } from "react-hot-toast";
+import { toast, Toaster, ToastOptions } from "react-hot-toast";
 import { GoBell } from "react-icons/go";
 
 export default function Toast(){

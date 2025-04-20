@@ -6,11 +6,10 @@ import { useMutation } from "@tanstack/react-query"
 import api from "@/lib/api/index"
 import useAuthStore from "@/store/useAuthStore"
 import useMutationToast from "@/hooks/useMutationToast"
-import { setToken, getToken } from "../cookies"
+import { setToken } from "../cookies"
 import { showToast, SUCCESS_TOAST } from "@/app/components/Toasts/Toast"
 import { ApiResponse } from "@/types/api/api"
 import { User } from "@/types/user"
-import { Post } from "@/types/posts"
 
 export type LoginForm = {
     username: string,
