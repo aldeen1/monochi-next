@@ -14,7 +14,8 @@ module.exports = {
         as: '*.js',
       }
     }
-  }
+  },
+  nextConfig
 }
 
 export default nextConfig;
