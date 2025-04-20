@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { toast, Toaster, ToastOptions } from "react-hot-toast";
 import { GoBell } from "react-icons/go";

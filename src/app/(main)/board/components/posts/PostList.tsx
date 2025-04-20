@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -20,7 +22,6 @@ const PostList: React.FC<PostListProps> = ({
     lastPostRef, 
     showCreateButton = false, 
     createButtonPath,
-    onCreateClick
 }) => {
     const { user } = useAuthStore()
     const { mutateAsync: handleDelete } = useDeletePost()
@@ -108,14 +109,7 @@ const PostList: React.FC<PostListProps> = ({
                         onMouseLeave={onMouseLeave}
                     />
                     <CreateButton
-                        trashButtonProps={{
-                            isDragging,
-                            isOverTrash,
-                            onMouseEnter,
-                            onMouseLeave
-                        }}
-                        createButtonPath={createButtonPath}
-                        onCreateClick={onCreateClick}
+                        path={createButtonPath}
                     />
                 </>
             )}

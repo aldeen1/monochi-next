@@ -1,3 +1,5 @@
+'use client'
+
 import { showToast, SUCCESS_TOAST } from "@/app/components/Toasts/Toast"
 import useMutationToast from "@/hooks/useMutationToast"
 import api from "@/lib/api/index"

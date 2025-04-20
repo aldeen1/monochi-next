@@ -1,13 +1,13 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useInView } from "react-intersection-observer"
-import { useGetAllPost } from '@/lib/api/post'
+import { getAllPosts } from '@/lib/api/post'
 import PostList from '../components/posts/PostList'
-import { SearchContext } from '@/app/( main )/layout'
+import { SearchContext } from '@/app/(main)/layout'
 import { useContext } from 'react'
 
-const BoardContainer = () => {
+export default function BoardContainer() {
     const { searchQuery, showLikedOnly } = useContext(SearchContext)
     const {ref, inView} = useInView({
         threshold: 0,
@@ -20,7 +20,7 @@ const BoardContainer = () => {
         fetchNextPage,
     } = useInfiniteQuery({
         queryKey: ['posts', searchQuery],
-        queryFn: ({ pageParam = 1 }) => useGetAllPost(pageParam, searchQuery),
+        queryFn: async ({ pageParam = 1 }) => getAllPosts(pageParam, searchQuery),
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
             if (!lastPage.meta) return undefined
@@ -47,13 +47,11 @@ const BoardContainer = () => {
     return (
         <div className='mt-5 mb-5 p-2.5 w-full h-full overflow-y-auto box-border'>
             <PostList 
-                posts={allVisiblePosts ?? []}
+                posts={allVisiblePosts || []} 
                 lastPostRef={ref}
                 showCreateButton={true}
-                createButtonPath="/board/post/create"
+                createButtonPath="/board/create"
             />
         </div>
     )
-}
-
-export default BoardContainer 
+} 

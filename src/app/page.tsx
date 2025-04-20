@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page(){
-  redirect('/board')
+  redirect('/login')
 }

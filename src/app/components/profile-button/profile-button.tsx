@@ -1,61 +1,36 @@
 'use client'
-import { useEffect } from 'react'
-import useAuthStore from '@/store/useAuthStore'
-import { useProfileButton } from './hooks/useProfileButton'
+
+import { useState, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { useGetStaticFile } from '@/lib/api/file'
+import useAuthStore from '@/store/useAuthStore'
+import { useQueryClient } from '@tanstack/react-query'
+import { useProfileButton } from './hooks/useProfileButton'
 
 const ProfileButton = () => {
-    const router = useRouter()
-    const {
-        user,
-        isAuthed
-    } = useAuthStore()
-
-    const {
-        isDropdownOpen,
-        toggleDropdown,
-        handleLogout,
-        getProfileImage
-    } = useProfileButton()
-
-    useEffect(() => {
-        if (!isAuthed) {
-            router.push('/login')
-        }
-    }, [isAuthed, router])
-
-    if (!isAuthed) return null
+    const { user } = useAuthStore()
+    const { data: profileImage, isLoading } = useGetStaticFile(user?.image_url || '')
+    const defaultImage = "https://i.pinimg.com/474x/20/4f/8e/204f8e853a9276e272ea2c69bd383bab.jpg"
+    const { toggleDropdown, isDropdownOpen } = useProfileButton()
 
     return (
-        <div className="relative">
-            <div 
-                className="w-12 h-12 rounded-full overflow-hidden cursor-pointer hover:ring-2 hover:ring-accent-blue transition-all duration-200"
-                onClick={toggleDropdown}
-            >
-                <img
-                    src={getProfileImage()}
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-            
-            {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-10">
-                    <button 
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => router.push(`/profile/${user?.username}`)}
-                    >
-                        Profile
-                    </button>
-                    <button 
-                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                        onClick={handleLogout}
-                    >
-                        Logout
-                    </button>
+        <Suspense fallback={<div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse" />}>
+            <div className="relative">
+                <div 
+                    className="w-10 h-10 rounded-full overflow-hidden relative cursor-pointer hover:ring-2 hover:ring-accent-blue transition-all duration-200"
+                    onClick={toggleDropdown}
+                >
+                    <Image 
+                        src={isLoading ? defaultImage : (profileImage || defaultImage)}
+                        alt={user?.name || 'Profile'}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 40px) 100vw, 40px"
+                    />
                 </div>
-            )}
-        </div>
+            </div>
+        </Suspense>
     )
 }
 

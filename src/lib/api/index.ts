@@ -23,18 +23,22 @@ api.interceptors.request.use(
     }
 )
 
-api.interceptors.response.use((response) => {
-    console.log('API response: ', response)
-    return response
-}), (error: AxiosError) => {
-    if(error.response){
-        console.error('Response Error: ', {
-            status: error.response.status,
-            data: error.response.data,
-            headers: error.response.headers
-        })
+api.interceptors.response.use(
+    (response) => {
+        console.log('API response: ', response)
+        return response
+    },
+    (error: AxiosError) => {
+        if(error.response){
+            console.error('Response Error: ', {
+                status: error.response.status,
+                data: error.response.data,
+                headers: error.response.headers
+            })
+        }
+        return Promise.reject(error)
     }
-}
+)
 
 export default api
 export {BASE_URL}

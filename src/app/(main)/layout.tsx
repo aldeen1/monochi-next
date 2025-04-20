@@ -6,10 +6,19 @@ import ProfileButton from "../components/profile-button/profile-button";
 import SearchBar from "../components/searchbar/searchbar";
 import { createContext, useState } from "react";
 
-export const SearchContext = createContext<{
+type SearchContextType = {
   searchQuery: string;
+  setSearchQuery: (query: string) => void;
   showLikedOnly: boolean;
-}>({ searchQuery: "", showLikedOnly: false });
+  setShowLikedOnly: (val: boolean) => void;
+};
+
+export const SearchContext = createContext<SearchContextType>({
+  searchQuery: '',
+  setSearchQuery: () => {},
+  showLikedOnly: false,
+  setShowLikedOnly: () => {},
+});
 
 export default function MainLayout({
   children,
@@ -25,7 +34,7 @@ export default function MainLayout({
   };
 
   return (
-    <SearchContext.Provider value={{ searchQuery, showLikedOnly }}>
+    <SearchContext.Provider value={{ searchQuery, showLikedOnly , setShowLikedOnly, setSearchQuery}}>
       <div className="flex h-screen w-full bg-[#B4BEC9]">
         <div className="fixed w-[284px] h-full bg-accent-blue">
           <Sidebar />

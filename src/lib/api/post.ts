@@ -1,3 +1,5 @@
+'use client'
+
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 import { ApiResponse } from "@/types/api/api"
@@ -35,7 +37,7 @@ const postApi = {
     })
 }
 
-export const useGetAllPost = async (page: number, searchQuery?: string) => {
+export const getAllPosts = async (page: number, searchQuery?: string) => {
     const response = await postApi.getAllPost(page, searchQuery)
     return response.data
 }
